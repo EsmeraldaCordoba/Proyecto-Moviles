@@ -21,6 +21,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ScheduleAppointmentActivity"
+            android:exported="true"
+            android:label="@string/schedule_new_appointment" />
+        <activity
+            android:name=".ClinicLocationActivity"
+            android:exported="true"
+            android:label="@string/clinics_title" />
     </application>
 
 </manifest>

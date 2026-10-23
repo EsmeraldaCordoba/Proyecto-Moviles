@@ -1,3 +1,84 @@
 <resources>
+    <!-- App & Navigation -->
     <string name="app_name">NutriStatus</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_appointments">Appointments</string>
+    <string name="nav_diary">Diary</string>
+    <string name="nav_clinics">Clinics</string>
+
+    <!-- Main Dashboard -->
+    <string name="active_nutritional_plan">Active Nutritional Plan</string>
+    <string name="weight_tracking_title">Weight Tracking</string>
+    <string name="target_weight">Goal: %s kg</string>
+    <string name="monthly_change">%s kg this month</string>
+    <string name="your_specialist_title">Your Specialist Physician</string>
+    <string name="reviews_count">(%d reviews)</string>
+    <string name="sample_patient_name">Ana García</string>
+
+    <!-- Content Descriptions -->
+    <string name="cd_profile_picture">Profile Picture</string>
+    <string name="cd_notifications">Notifications</string>
+    <string name="cd_calendar">Calendar</string>
+    <string name="cd_location_pin">Clinic Location Pin</string>
+    <string name="cd_home">Home</string>
+    <string name="cd_appointments">Appointments</string>
+    <string name="cd_diary">Diary</string>
+    <string name="cd_clinics">Clinics</string>
+
+    <!-- Appointments & Scheduling -->
+    <string name="my_appointments_title">My Medical Appointments</string>
+    <string name="schedule_new_appointment">Schedule New Appointment</string>
+    <string name="search_doctor_placeholder">Search by doctor or specialty…</string>
+    <string name="filter_date">Date</string>
+    <string name="filter_all">All</string>
+    <string name="filter_pending">Pending</string>
+    <string name="filter_confirmed">Confirmed</string>
+    <string name="filter_completed">Completed</string>
+    <string name="filter_cancelled">Cancelled</string>
+
+    <!-- Form Fields -->
+    <string name="required_specialty">Required Specialty</string>
+    <string name="select_doctor">Select Doctor</string>
+    <string name="select_date">Select Date</string>
+    <string name="available_time_slots">Available Time Slots</string>
+    <string name="consultation_reason_notes">Consultation Reason / Notes</string>
+    <string name="notes_placeholder">E.g., Keto diet follow-up consultation and body measurement…</string>
+    <string name="save_appointment">Save Appointment</string>
+    <string name="cancel_appointment">Cancel Appointment</string>
+    <string name="reschedule_appointment">Reschedule Appointment</string>
+
+    <!-- Specialist Approaches -->
+    <string name="approach_clinical_sports">Clinical &amp; Sports Nutrition</string>
+    <string name="approach_weight_management">Weight Management</string>
+    <string name="approach_functional_hormonal">Functional Nutrition for Hormonal Balance</string>
+    <string name="approach_endocrinology">Endocrinology &amp; Metabolism</string>
+
+    <!-- Nutritional Diary -->
+    <string name="nutritional_diary_title">Nutritional Diary</string>
+    <string name="search_meals_placeholder">Search meals or notes…</string>
+    <string name="upload_photos">Upload Photos</string>
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
+    <string name="meal_category_breakfast">Breakfast</string>
+    <string name="meal_category_lunch">Lunch</string>
+    <string name="meal_category_snack">Snack</string>
+    <string name="meal_category_dinner">Dinner</string>
+
+    <!-- Clinic & Map -->
+    <string name="clinics_title">Clinics in Your Area</string>
+    <string name="clinics_subtitle">The following are all the clinics we could find in your area:</string>
+    <string name="office">Office</string>
+    <string name="operating_hours">Operating Hours</string>
+    <string name="get_directions">Get Directions</string>
+
+    <!-- Dialogs & Confirmation Messages -->
+    <string name="dialog_confirmation_title">Confirmation</string>
+    <string name="dialog_cancel_24h_warning">Are you sure you want to cancel your appointment with less than 24 hours notice?</string>
+    <string name="dialog_appointment_scheduled_success">Appointment scheduled successfully!</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="error">Error</string>
 </resources>

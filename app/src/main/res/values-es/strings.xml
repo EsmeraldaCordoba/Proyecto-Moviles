@@ -1,0 +1,84 @@
+<resources>
+    <!-- App & Navigation -->
+    <string name="app_name">NutriStatus</string>
+    <string name="nav_home">Inicio</string>
+    <string name="nav_appointments">Citas</string>
+    <string name="nav_diary">Diario</string>
+    <string name="nav_clinics">Clínicas</string>
+
+    <!-- Main Dashboard -->
+    <string name="active_nutritional_plan">Plan Nutricional Activo</string>
+    <string name="weight_tracking_title">Seguimiento de Peso</string>
+    <string name="target_weight">Meta: %s kg</string>
+    <string name="monthly_change">%s kg este mes</string>
+    <string name="your_specialist_title">Tu Médico Especialista</string>
+    <string name="reviews_count">(%d reseñas)</string>
+    <string name="sample_patient_name">Ana García</string>
+
+    <!-- Content Descriptions -->
+    <string name="cd_profile_picture">Foto de Perfil</string>
+    <string name="cd_notifications">Notificaciones</string>
+    <string name="cd_calendar">Calendario</string>
+    <string name="cd_location_pin">Pin de Ubicación de Clínica</string>
+    <string name="cd_home">Inicio</string>
+    <string name="cd_appointments">Citas</string>
+    <string name="cd_diary">Diario</string>
+    <string name="cd_clinics">Clínicas</string>
+
+    <!-- Appointments & Scheduling -->
+    <string name="my_appointments_title">Mis Citas Médicas</string>
+    <string name="schedule_new_appointment">Agendar Nueva Cita</string>
+    <string name="search_doctor_placeholder">Buscar por doctor o especialidad…</string>
+    <string name="filter_date">Fecha</string>
+    <string name="filter_all">Todas</string>
+    <string name="filter_pending">Pendientes</string>
+    <string name="filter_confirmed">Confirmadas</string>
+    <string name="filter_completed">Completadas</string>
+    <string name="filter_cancelled">Canceladas</string>
+
+    <!-- Form Fields -->
+    <string name="required_specialty">Especialidad Requerida</string>
+    <string name="select_doctor">Seleccionar Médico</string>
+    <string name="select_date">Seleccionar Fecha</string>
+    <string name="available_time_slots">Horarios Disponibles</string>
+    <string name="consultation_reason_notes">Motivo de la Consulta / Notas</string>
+    <string name="notes_placeholder">Ej: Consulta de seguimiento de dieta keto y medición corporal…</string>
+    <string name="save_appointment">Guardar Cita</string>
+    <string name="cancel_appointment">Cancelar Cita</string>
+    <string name="reschedule_appointment">Reprogramar Cita</string>
+
+    <!-- Specialist Approaches -->
+    <string name="approach_clinical_sports">Nutrición Clínica y Deportiva</string>
+    <string name="approach_weight_management">Control de Peso</string>
+    <string name="approach_functional_hormonal">Nutrición Funcional para el Equilibrio Hormonal</string>
+    <string name="approach_endocrinology">Endocrinología y Metabolismo</string>
+
+    <!-- Nutritional Diary -->
+    <string name="nutritional_diary_title">Diario Nutricional</string>
+    <string name="search_meals_placeholder">Buscar comidas o notas…</string>
+    <string name="upload_photos">Subir Fotos</string>
+    <string name="camera">Cámara</string>
+    <string name="gallery">Galería</string>
+    <string name="meal_category_breakfast">Desayuno</string>
+    <string name="meal_category_lunch">Almuerzo</string>
+    <string name="meal_category_snack">Merienda</string>
+    <string name="meal_category_dinner">Cena</string>
+
+    <!-- Clinic & Map -->
+    <string name="clinics_title">Clínicas en tu área</string>
+    <string name="clinics_subtitle">Las siguientes son todas las clínicas que pudimos encontrar en tu área:</string>
+    <string name="office">Consultorio</string>
+    <string name="operating_hours">Horario de atención</string>
+    <string name="get_directions">Trazar ruta</string>
+
+    <!-- Dialogs & Confirmation Messages -->
+    <string name="dialog_confirmation_title">Confirmación</string>
+    <string name="dialog_cancel_24h_warning">¿Está seguro que desea cancelar su cita con menos de 24 horas de antelación?</string>
+    <string name="dialog_appointment_scheduled_success">Cita agendada exitosamente.</string>
+    <string name="confirm">Confirmar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="yes">Sí</string>
+    <string name="no">No</string>
+    <string name="dismiss">Aceptar</string>
+    <string name="error">Error</string>
+</resources>
