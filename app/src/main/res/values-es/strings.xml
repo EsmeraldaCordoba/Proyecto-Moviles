@@ -1,0 +1,49 @@
+<resources>
+    <string name="app_name">NutriStatus</string>
+
+    <!-- Navigation & Titles -->
+    <string name="nav_appointments">Citas</string>
+    <string name="nav_locations">Ubicaciones de Clínicas</string>
+    <string name="title_schedule_appointment">Agendar Cita</string>
+    <string name="title_appointment_history">Historial de Citas</string>
+    <string name="title_clinic_locations">Nuestras Clínicas y Mapa</string>
+
+    <!-- Appointment Fields & Labels -->
+    <string name="label_specialist">Especialista</string>
+    <string name="label_specialty">Especialidad</string>
+    <string name="label_date">Fecha</string>
+    <string name="label_time">Hora</string>
+    <string name="label_notes">Notas / Objetivos</string>
+    <string name="label_status">Estado</string>
+    <string name="label_fee">Costo de Consulta</string>
+
+    <!-- Statuses -->
+    <string name="status_pending">Pendiente</string>
+    <string name="status_completed">Completada</string>
+    <string name="status_cancelled">Cancelada</string>
+
+    <!-- Specialties -->
+    <string name="specialty_sports">Nutrición Deportiva</string>
+    <string name="specialty_weight">Control de Peso</string>
+    <string name="specialty_hormonal">Nutrición Funcional para el Equilibrio Hormonal</string>
+
+    <!-- Buttons -->
+    <string name="btn_schedule">Agendar Cita</string>
+    <string name="btn_reschedule">Reprogramar</string>
+    <string name="btn_cancel_appointment">Cancelar Cita</string>
+    <string name="btn_view_map">Ver en el Mapa</string>
+    <string name="btn_filter">Filtrar</string>
+
+    <!-- Dialogs & Messages -->
+    <string name="dialog_cancel_title">Cancelar Cita</string>
+    <string name="dialog_cancel_message">¿Está seguro que desea cancelar su cita con menos de 24 horas de antelación?</string>
+    <string name="msg_success_scheduled">¡Cita agendada exitosamente!</string>
+    <string name="msg_success_cancelled">Cita cancelada exitosamente.</string>
+    <string name="msg_error_generic">Ocurrió un error. Por favor intente de nuevo.</string>
+
+    <!-- Location Fields -->
+    <string name="label_address">Dirección</string>
+    <string name="label_phone">Teléfono</string>
+    <string name="label_hours">Horario</string>
+    <string name="hint_search_location">Buscar por ciudad o nombre de clínica…</string>
+</resources>
