@@ -1,0 +1,112 @@
+
+
+<resources>
+
+    <!-- La mayoria de strings son temporales y solo por show/para demostración -->
+
+    <string name="app_name">NutriStatus</string>
+    <string name="user_name">María González</string>
+    <string name="user_subtitle">Paciente NutriStatus</string>
+
+    <string name="cd_notifications">Notificaciones</string>
+    <string name="cd_user_avatar">Imagen de perfil de usuario</string>
+    <string name="cd_doctor_avatar">Imagen del doctor</string>
+    <string name="cd_clock_icon">Icono de reloj</string>
+    <string name="cd_location_icon">Icono de ubicación</string>
+    <string name="cd_search_icon">Icono de búsqueda</string>
+    <string name="cd_filter_icon">Icono de filtro</string>
+    <string name="cd_calendar_icon">Icono de calendario</string>
+    <string name="cd_add_photo">Subir foto de platillo</string>
+    <string name="cd_meal_image">Imagen del platillo</string>
+
+    <string name="weight_title">Seguimiento de Peso</string>
+    <string name="weight_current">68.5 kg</string>
+    <string name="weight_target">Meta: 65.0 kg (-7.5 kg)</string>
+    <string name="weight_last_update">Último registro: Hace 2 días</string>
+
+    <string name="doctor_title">Mi Doctor / Nutricionista</string>
+    <string name="doctor_name">Dr. Alejandro Morales</string>
+    <string name="doctor_specialty">Especialista en Nutrición Clínica</string>
+    <string name="doctor_hours">Lun - Vie: 8:00 AM - 5:00 PM</string>
+    <string name="doctor_clinic">Clínica NutriSalud Central, San José</string>
+
+    <string name="nav_inicio">Inicio</string>
+    <string name="nav_citas">Citas</string>
+    <string name="nav_diario">Diario</string>
+    <string name="nav_clinicas">Clínicas</string>
+
+    <string name="citas_search_hint">Buscar cita, doctor o clínica…</string>
+    <string name="citas_btn_fecha">Fecha</string>
+    <string name="citas_btn_filtros">Filtros</string>
+    <string name="citas_btn_agendar">+ Agendar Nueva Cita</string>
+    <string name="citas_title_section">Mis Citas Médicas</string>
+
+    <string name="diario_activity_title">Diario Nutricional</string>
+    <string name="diario_search_hint">Buscar en mi diario…</string>
+    <string name="diario_btn_subir_foto">Subir Foto</string>
+    <string name="diario_title_section">Registro Alimentario Reciente</string>
+
+    <string name="diario1_title">Desayuno Saludable</string>
+    <string name="diario1_desc">Avena integral cocida con leche de almendras, fresas frescas y chía.</string>
+    <string name="diario1_time">Hoy, 08:30 AM</string>
+
+    <string name="diario2_title">Almuerzo Pollo</string>
+    <string name="diario2_desc">Pechuga de pollo a la plancha con brócoli al vapor y quinua.</string>
+    <string name="diario2_time">Ayer, 01:15 PM</string>
+
+    <string name="diario3_title">Merienda Batido</string>
+    <string name="diario3_desc">Batido de proteína whey de vainilla con banano y espinacas.</string>
+    <string name="diario3_time">12 Oct, 04:30 PM</string>
+
+    <string name="diario4_title">Cena Ensalada</string>
+    <string name="diario4_desc">Ensalada de espinacas, atún en agua, tomates cherry y aguacate.</string>
+    <string name="diario4_time">11 Oct, 07:45 PM</string>
+
+    <string name="diario5_title">Snack Frutas</string>
+    <string name="diario5_desc">Porción de manzana verde con almendras fileteadas.</string>
+    <string name="diario5_time">10 Oct, 10:00 AM</string>
+
+    <string name="diario6_title">Cena Ligera</string>
+    <string name="diario6_desc">Sopa de vegetales con pollo desmenuzado y tostadas integrales.</string>
+    <string name="diario6_time">09 Oct, 08:00 PM</string>
+
+    <string name="status_confirmada">Confirmada</string>
+    <string name="status_completada">Completada</string>
+
+    <string name="cita1_doctor">Dr. Alejandro Morales</string>
+    <string name="cita1_dept">Nutrición Clínica</string>
+    <string name="cita1_date">15 de Octubre, 2025 – 10:00 AM</string>
+    <string name="cita1_clinic">Clínica NutriSalud Central, San José</string>
+
+    <string name="cita2_doctor">Dra. Lucía Fernández</string>
+    <string name="cita2_dept">Nutrición Deportiva</string>
+    <string name="cita2_date">28 de Octubre, 2025 – 02:30 PM</string>
+    <string name="cita2_clinic">Clínica NutriSalud, Sede Escazú</string>
+
+    <string name="cita3_doctor">Dr. Carlos Gutiérrez</string>
+    <string name="cita3_dept">Control de Peso y Metabolismo</string>
+    <string name="cita3_date">01 de Septiembre, 2025 – 09:00 AM</string>
+    <string name="cita3_clinic">Clínica NutriSalud Central, San José</string>
+
+    <string name="cita4_doctor">Dra. Sofía Vargas</string>
+    <string name="cita4_dept">Nutrición Funcional</string>
+    <string name="cita4_date">15 de Agosto, 2025 – 11:15 AM</string>
+    <string name="cita4_clinic">Clínica NutriSalud, Sede Heredia</string>
+
+    <string name="msg_inicio">Yendo a inicio</string>
+    <string name="msg_citas">Yendo a citas</string>
+    <string name="msg_diario">Yendo a diario</string>
+    <string name="msg_clinicas">Yendo a clínicas</string>
+    <string name="msg_notificaciones">Yendo a notificaciones</string>
+    <string name="msg_agendar">Abriendo agendamiento de cita…</string>
+    <string name="msg_filtro_fecha">Seleccionando filtro por fecha…</string>
+    <string name="msg_filtros">Abriendo opciones de filtros…</string>
+    <string name="msg_ya_en_citas">Ya estás en la pantalla de Citas</string>
+    <string name="msg_ya_en_diario">Ya estás en la pantalla de Diario</string>
+    <string name="msg_subir_foto">Abriendo cámara o galería para subir foto del platillo…</string>
+
+    <string name="dialog_close">Cerrar</string>
+    <string name="dialog_view_location">Ver Ubicación</string>
+    <string name="dialog_add_note">Añadir Nota</string>
+    <string name="dialog_appointment_details">Detalles de la Cita</string>
+</resources>

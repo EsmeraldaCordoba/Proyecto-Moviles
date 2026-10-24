@@ -9,13 +9,17 @@ import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import cr.ac.utn.nutristatus.ui.viewmodel.AppointmentsViewModel
 
 class CitasActivity : AppCompatActivity() {
+
+    private val viewModel: AppointmentsViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,6 +61,7 @@ class CitasActivity : AppCompatActivity() {
         inputSearch.setOnEditorActionListener { v, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 val query = v.text.toString().trim()
+                viewModel.onSearchQueryChanged(query)
                 if (query.isNotEmpty()) {
                     showToast("Buscando: $query")
                 } else {
@@ -143,7 +148,9 @@ class CitasActivity : AppCompatActivity() {
 
         val btnDiario = findViewById<LinearLayout>(R.id.btn_diario)
         btnDiario.setOnClickListener {
-            showToast(getString(R.string.msg_diario))
+            val intent = Intent(this, DiarioActivity::class.java)
+            startActivity(intent)
+            finish()
         }
 
         val btnClinicas = findViewById<LinearLayout>(R.id.btn_clinicas)
@@ -191,12 +198,12 @@ class CitasActivity : AppCompatActivity() {
         """.trimIndent()
 
         MaterialAlertDialogBuilder(this)
-            .setTitle("Detalles de la Cita")
+            .setTitle(getString(R.string.dialog_appointment_details))
             .setMessage(message)
-            .setPositiveButton("Cerrar") { dialog, _ ->
+            .setPositiveButton(getString(R.string.dialog_close)) { dialog, _ ->
                 dialog.dismiss()
             }
-            .setNegativeButton("Ver Ubicación") { _, _ ->
+            .setNegativeButton(getString(R.string.dialog_view_location)) { _, _ ->
                 showToast("Yendo a ubicación de $clinic")
             }
             .show()

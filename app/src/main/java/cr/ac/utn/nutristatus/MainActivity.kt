@@ -7,16 +7,26 @@ import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import cr.ac.utn.nutristatus.ui.viewmodel.MainViewModel
 
 class MainActivity : AppCompatActivity() {
+
+    private val viewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
+
+        // Consume ViewModel state
+        val user = viewModel.userProfile.value
+        if (user != null) {
+            findViewById<android.widget.TextView>(R.id.txt_user_name)?.text = user.name
+        }
 
         val headerBar = findViewById<View>(R.id.header_bar)
         val footerBar = findViewById<View>(R.id.footer_bar)
@@ -62,7 +72,8 @@ class MainActivity : AppCompatActivity() {
 
         val btnDiario = findViewById<LinearLayout>(R.id.btn_diario)
         btnDiario.setOnClickListener {
-            showToast(getString(R.string.msg_diario))
+            val intent = Intent(this, DiarioActivity::class.java)
+            startActivity(intent)
         }
 
         val btnClinicas = findViewById<LinearLayout>(R.id.btn_clinicas)
