@@ -1,3 +1,49 @@
 <resources>
     <string name="app_name">NutriStatus</string>
+
+    <!-- Navigation & Titles -->
+    <string name="nav_appointments">Appointments</string>
+    <string name="nav_locations">Clinic Locations</string>
+    <string name="title_schedule_appointment">Schedule Appointment</string>
+    <string name="title_appointment_history">Appointment History</string>
+    <string name="title_clinic_locations">Our Clinics &amp; Map</string>
+
+    <!-- Appointment Fields & Labels -->
+    <string name="label_specialist">Specialist</string>
+    <string name="label_specialty">Specialty</string>
+    <string name="label_date">Date</string>
+    <string name="label_time">Time</string>
+    <string name="label_notes">Notes / Objectives</string>
+    <string name="label_status">Status</string>
+    <string name="label_fee">Consultation Fee</string>
+
+    <!-- Statuses -->
+    <string name="status_pending">Pending</string>
+    <string name="status_completed">Completed</string>
+    <string name="status_cancelled">Cancelled</string>
+
+    <!-- Specialties -->
+    <string name="specialty_sports">Sports Nutrition</string>
+    <string name="specialty_weight">Weight Control</string>
+    <string name="specialty_hormonal">Functional Nutrition for Hormonal Balance</string>
+
+    <!-- Buttons -->
+    <string name="btn_schedule">Schedule Appointment</string>
+    <string name="btn_reschedule">Reschedule</string>
+    <string name="btn_cancel_appointment">Cancel Appointment</string>
+    <string name="btn_view_map">View on Map</string>
+    <string name="btn_filter">Filter</string>
+
+    <!-- Dialogs & Messages -->
+    <string name="dialog_cancel_title">Cancel Appointment</string>
+    <string name="dialog_cancel_message">Are you sure you want to cancel your appointment with less than 24 hours notice?</string>
+    <string name="msg_success_scheduled">Appointment scheduled successfully!</string>
+    <string name="msg_success_cancelled">Appointment cancelled successfully.</string>
+    <string name="msg_error_generic">An error occurred. Please try again.</string>
+
+    <!-- Location Fields -->
+    <string name="label_address">Address</string>
+    <string name="label_phone">Phone</string>
+    <string name="label_hours">Opening Hours</string>
+    <string name="hint_search_location">Search by city or clinic name…</string>
 </resources>
