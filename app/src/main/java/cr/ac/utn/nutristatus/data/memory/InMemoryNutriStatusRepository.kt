@@ -1,174 +1,214 @@
 package cr.ac.utn.nutristatus.data.memory
 
+import android.content.Context
 import cr.ac.utn.nutristatus.domain.model.Appointment
 import cr.ac.utn.nutristatus.domain.model.AppointmentStatus
 import cr.ac.utn.nutristatus.domain.model.ClinicLocation
 import cr.ac.utn.nutristatus.domain.model.Specialist
 import cr.ac.utn.nutristatus.domain.repository.AppointmentRepository
 import cr.ac.utn.nutristatus.domain.repository.LocationRepository
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
+import org.json.JSONArray
 
-class InMemoryNutriStatusRepository : AppointmentRepository, LocationRepository {
+class InMemoryNutriStatusRepository(private val context: Context? = null) : AppointmentRepository, LocationRepository {
 
-    private val _specialists = MutableStateFlow(
-        listOf(
-            Specialist(
-                id = "spec_1",
-                name = "Dr. Alejandro Morales",
-                specialty = "Sports Nutrition",
-                rating = 4.9f,
-                imageUrl = "https://example.com/alejandro.jpg",
-                bio = "Specialist in high-performance sports nutrition and body recomposition.",
-                consultationFee = 50.0,
-                availableDays = listOf("Monday", "Wednesday", "Friday")
-            ),
-            Specialist(
-                id = "spec_2",
-                name = "Dra. Sofía Vargas",
-                specialty = "Weight Control",
-                rating = 4.8f,
-                imageUrl = "https://example.com/sofia.jpg",
-                bio = "Expert in sustainable weight loss, clinical nutrition, and metabolic health.",
-                consultationFee = 45.0,
-                availableDays = listOf("Tuesday", "Thursday", "Saturday")
-            ),
-            Specialist(
-                id = "spec_3",
-                name = "Dr. Carlos Jiménez",
-                specialty = "Functional Nutrition for Hormonal Balance",
-                rating = 4.95f,
-                imageUrl = "https://example.com/carlos.jpg",
-                bio = "Focused on hormonal balance, insulin resistance, and gut health optimization.",
-                consultationFee = 60.0,
-                availableDays = listOf("Monday", "Tuesday", "Thursday")
-            )
-        )
-    )
+    private val specialistsList: List<Specialist> = loadSpecialists()
+    private val appointmentsList: MutableList<Appointment> = loadAppointments().toMutableList()
+    private val locationsList: List<ClinicLocation> = loadLocations()
 
-    private val _appointments = MutableStateFlow(
-        listOf(
-            Appointment(
-                id = "app_1",
-                patientId = "pat_1",
-                patientName = "Maria Gomez",
-                specialistId = "spec_1",
-                specialistName = "Dr. Alejandro Morales",
-                specialistSpecialty = "Sports Nutrition",
-                date = "2025-06-10",
-                time = "10:00",
-                status = AppointmentStatus.PENDING,
-                notes = "Initial sports assessment and macro calculation."
-            ),
-            Appointment(
-                id = "app_2",
-                patientId = "pat_1",
-                patientName = "Maria Gomez",
-                specialistId = "spec_2",
-                specialistName = "Dra. Sofía Vargas",
-                specialistSpecialty = "Weight Control",
-                date = "2025-05-15",
-                time = "14:30",
-                status = AppointmentStatus.COMPLETED,
-                notes = "Monthly weight check-in and diet adjustment."
-            )
-        )
-    )
-
-    private val _clinicLocations = MutableStateFlow(
-        listOf(
-            ClinicLocation(
-                id = "loc_1",
-                name = "NutriStatus San José Central",
-                address = "Avenida Central, Calle 4, Edificio Médico Sabana, Piso 3",
-                city = "San José",
-                latitude = 9.9328,
-                longitude = -84.0807,
-                phoneNumber = "+506 2222-3333",
-                openingHours = "Mon - Fri: 8:00 AM - 6:00 PM",
-                imageUrl = "https://example.com/sanjose_clinic.jpg"
-            ),
-            ClinicLocation(
-                id = "loc_2",
-                name = "NutriStatus Alajuela Mall",
-                address = "Costado norte de City Mall, Plaza Ejecutiva Local 12",
-                city = "Alajuela",
-                latitude = 10.0162,
-                longitude = -84.2145,
-                phoneNumber = "+506 2441-5555",
-                openingHours = "Mon - Sat: 9:00 AM - 7:00 PM",
-                imageUrl = "https://example.com/alajuela_clinic.jpg"
-            ),
-            ClinicLocation(
-                id = "loc_3",
-                name = "NutriStatus Heredia Plaza",
-                address = "Frente a Universidad Nacional, Centro Comercial Paseo de las Flores",
-                city = "Heredia",
-                latitude = 9.9988,
-                longitude = -84.1165,
-                phoneNumber = "+506 2261-7777",
-                openingHours = "Mon - Fri: 8:30 AM - 5:30 PM",
-                imageUrl = "https://example.com/heredia_clinic.jpg"
-            )
-        )
-    )
-
-    override fun getAppointments(): Flow<List<Appointment>> = _appointments.asStateFlow()
-
-    override suspend fun getAppointmentById(id: String): Appointment? {
-        return _appointments.value.find { it.id == id }
-    }
-
-    override suspend fun scheduleAppointment(appointment: Appointment): Result<Unit> {
+    private fun loadSpecialists(): List<Specialist> {
         return try {
-            _appointments.update { currentList ->
-                currentList + appointment
-            }
-            Result.success(Unit)
-        } catch (e: Exception) {
-            Result.failure(e)
-        }
-    }
-
-    override suspend fun updateAppointment(appointment: Appointment): Result<Unit> {
-        return try {
-            _appointments.update { currentList ->
-                currentList.map { if (it.id == appointment.id) appointment else it }
-            }
-            Result.success(Unit)
-        } catch (e: Exception) {
-            Result.failure(e)
-        }
-    }
-
-    override suspend fun cancelAppointment(id: String, reason: String): Result<Unit> {
-        return try {
-            _appointments.update { currentList ->
-                currentList.map {
-                    if (it.id == id) {
-                        it.copy(status = AppointmentStatus.CANCELLED, cancelReason = reason)
-                    } else {
-                        it
+            val jsonString = context?.assets?.open("specialists.json")?.bufferedReader().use { it?.readText() }
+            if (jsonString != null) {
+                val jsonArray = JSONArray(jsonString)
+                val list = mutableListOf<Specialist>()
+                for (i in 0 until jsonArray.length()) {
+                    val obj = jsonArray.getJSONObject(i)
+                    val daysArray = obj.getJSONArray("availableDays")
+                    val days = mutableListOf<String>()
+                    for (j in 0 until daysArray.length()) {
+                        days.add(daysArray.getString(j))
                     }
+                    list.add(
+                        Specialist(
+                            id = obj.getString("id"),
+                            name = obj.getString("name"),
+                            specialty = obj.getString("specialty"),
+                            rating = obj.getDouble("rating").toFloat(),
+                            imageUrl = obj.getString("imageUrl"),
+                            bio = obj.getString("bio"),
+                            consultationFee = obj.getDouble("consultationFee"),
+                            availableDays = days
+                        )
+                    )
                 }
+                list
+            } else {
+                getDefaultSpecialists()
             }
+        } catch (_: Exception) {
+            getDefaultSpecialists()
+        }
+    }
+
+    private fun loadAppointments(): List<Appointment> {
+        return try {
+            val jsonString = context?.assets?.open("appointments.json")?.bufferedReader().use { it?.readText() }
+            if (jsonString != null) {
+                val jsonArray = JSONArray(jsonString)
+                val list = mutableListOf<Appointment>()
+                for (i in 0 until jsonArray.length()) {
+                    val obj = jsonArray.getJSONObject(i)
+                    list.add(
+                        Appointment(
+                            id = obj.getString("id"),
+                            patientId = obj.getString("patientId"),
+                            patientName = obj.getString("patientName"),
+                            specialistId = obj.getString("specialistId"),
+                            specialistName = obj.getString("specialistName"),
+                            specialistSpecialty = obj.getString("specialistSpecialty"),
+                            date = obj.getString("date"),
+                            time = obj.getString("time"),
+                            status = AppointmentStatus.valueOf(obj.getString("status")),
+                            notes = obj.getString("notes"),
+                            cancelReason = if (obj.has("cancelReason") && !obj.isNull("cancelReason")) obj.getString("cancelReason") else null
+                        )
+                    )
+                }
+                list
+            } else {
+                getDefaultAppointments()
+            }
+        } catch (_: Exception) {
+            getDefaultAppointments()
+        }
+    }
+
+    private fun loadLocations(): List<ClinicLocation> {
+        return try {
+            val jsonString = context?.assets?.open("locations.json")?.bufferedReader().use { it?.readText() }
+            if (jsonString != null) {
+                val jsonArray = JSONArray(jsonString)
+                val list = mutableListOf<ClinicLocation>()
+                for (i in 0 until jsonArray.length()) {
+                    val obj = jsonArray.getJSONObject(i)
+                    list.add(
+                        ClinicLocation(
+                            id = obj.getString("id"),
+                            name = obj.getString("name"),
+                            address = obj.getString("address"),
+                            city = obj.getString("city"),
+                            latitude = obj.getDouble("latitude"),
+                            longitude = obj.getDouble("longitude"),
+                            phoneNumber = obj.getString("phoneNumber"),
+                            openingHours = obj.getString("openingHours"),
+                            imageUrl = obj.getString("imageUrl")
+                        )
+                    )
+                }
+                list
+            } else {
+                getDefaultLocations()
+            }
+        } catch (_: Exception) {
+            getDefaultLocations()
+        }
+    }
+
+    private fun getDefaultSpecialists() = listOf(
+        Specialist(
+            id = "spec_1",
+            name = "Dr. Alejandro Morales",
+            specialty = "Sports Nutrition",
+            rating = 4.9f,
+            imageUrl = "https://example.com/alejandro.jpg",
+            bio = "Specialist in high-performance sports nutrition and body recomposition.",
+            consultationFee = 50.0,
+            availableDays = listOf("Monday", "Wednesday", "Friday")
+        )
+    )
+
+    private fun getDefaultAppointments() = listOf(
+        Appointment(
+            id = "app_1",
+            patientId = "pat_1",
+            patientName = "Maria Gomez",
+            specialistId = "spec_1",
+            specialistName = "Dr. Alejandro Morales",
+            specialistSpecialty = "Sports Nutrition",
+            date = "2025-06-10",
+            time = "10:00",
+            status = AppointmentStatus.PENDING,
+            notes = "Initial sports assessment and macro calculation."
+        )
+    )
+
+    private fun getDefaultLocations() = listOf(
+        ClinicLocation(
+            id = "loc_1",
+            name = "NutriStatus San José Central",
+            address = "Avenida Central, Calle 4, Edificio Médico Sabana, Piso 3",
+            city = "San José",
+            latitude = 9.9328,
+            longitude = -84.0807,
+            phoneNumber = "+506 2222-3333",
+            openingHours = "Mon - Fri: 8:00 AM - 6:00 PM",
+            imageUrl = "https://example.com/sanjose_clinic.jpg"
+        )
+    )
+
+    override fun getAppointments(): List<Appointment> = appointmentsList
+
+    override fun getAppointmentById(id: String): Appointment? {
+        return appointmentsList.find { it.id == id }
+    }
+
+    override fun scheduleAppointment(appointment: Appointment): Result<Unit> {
+        return try {
+            appointmentsList.add(appointment)
             Result.success(Unit)
         } catch (e: Exception) {
             Result.failure(e)
         }
     }
 
-    override fun getSpecialists(): Flow<List<Specialist>> = _specialists.asStateFlow()
-
-    override suspend fun getSpecialistById(id: String): Specialist? {
-        return _specialists.value.find { it.id == id }
+    override fun updateAppointment(appointment: Appointment): Result<Unit> {
+        return try {
+            val index = appointmentsList.indexOfFirst { it.id == appointment.id }
+            if (index != -1) {
+                appointmentsList[index] = appointment
+                Result.success(Unit)
+            } else {
+                Result.failure(Exception("Appointment not found"))
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
     }
 
-    override fun getClinicLocations(): Flow<List<ClinicLocation>> = _clinicLocations.asStateFlow()
+    override fun cancelAppointment(id: String, reason: String): Result<Unit> {
+        return try {
+            val index = appointmentsList.indexOfFirst { it.id == id }
+            if (index != -1) {
+                val app = appointmentsList[index]
+                appointmentsList[index] = app.copy(status = AppointmentStatus.CANCELLED, cancelReason = reason)
+                Result.success(Unit)
+            } else {
+                Result.failure(Exception("Appointment not found"))
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
 
-    override suspend fun getLocationById(id: String): ClinicLocation? {
-        return _clinicLocations.value.find { it.id == id }
+    override fun getSpecialists(): List<Specialist> = specialistsList
+
+    override fun getSpecialistById(id: String): Specialist? {
+        return specialistsList.find { it.id == id }
+    }
+
+    override fun getClinicLocations(): List<ClinicLocation> = locationsList
+
+    override fun getLocationById(id: String): ClinicLocation? {
+        return locationsList.find { it.id == id }
     }
 }

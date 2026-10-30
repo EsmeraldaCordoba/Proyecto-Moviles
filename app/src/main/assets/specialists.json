@@ -1,0 +1,32 @@
+[
+  {
+    "id": "spec_1",
+    "name": "Dr. Alejandro Morales",
+    "specialty": "Sports Nutrition",
+    "rating": 4.9,
+    "imageUrl": "https://example.com/alejandro.jpg",
+    "bio": "Specialist in high-performance sports nutrition and body recomposition.",
+    "consultationFee": 50.0,
+    "availableDays": ["Monday", "Wednesday", "Friday"]
+  },
+  {
+    "id": "spec_2",
+    "name": "Dra. Sofía Vargas",
+    "specialty": "Weight Control",
+    "rating": 4.8,
+    "imageUrl": "https://example.com/sofia.jpg",
+    "bio": "Expert in sustainable weight loss, clinical nutrition, and metabolic health.",
+    "consultationFee": 45.0,
+    "availableDays": ["Tuesday", "Thursday", "Saturday"]
+  },
+  {
+    "id": "spec_3",
+    "name": "Dr. Carlos Jiménez",
+    "specialty": "Functional Nutrition for Hormonal Balance",
+    "rating": 4.95,
+    "imageUrl": "https://example.com/carlos.jpg",
+    "bio": "Focused on hormonal balance, insulin resistance, and gut health optimization.",
+    "consultationFee": 60.0,
+    "availableDays": ["Monday", "Tuesday", "Thursday"]
+  }
+]
