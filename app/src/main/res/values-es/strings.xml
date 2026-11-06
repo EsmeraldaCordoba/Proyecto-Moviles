@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">NutriStatus</string>
+    <string name="title_book_appointment">Agendar Nueva Cita</string>
+    <string name="label_specialty">Especialidad Requerida</string>
+    <string name="label_doctor">Seleccionar Médico</string>
+    <string name="label_date">Seleccionar Fecha</string>
+    <string name="label_time">Horarios Disponibles</string>
+    <string name="label_reason">Motivo de la Consulta / Notas</string>
+    <string name="btn_save_appointment">Guardar Cita</string>
+
+    <string name="title_clinics">Clínicas en tu área</string>
+    <string name="desc_clinics">Encuentre la clínica más cercana a usted</string>
+
+    <string name="toast_appointment_saved">¡Cita guardada exitosamente!</string>
+    <string name="toast_error_fields">Por favor complete todos los campos requeridos.</string>
+    <string name="toast_cancel_warning">¿Está seguro que desea cancelar?</string>
+</resources>
