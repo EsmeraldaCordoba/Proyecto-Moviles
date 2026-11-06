@@ -7,4 +7,11 @@
     <string name="label_time">Available Times</string>
     <string name="label_reason">Reason for Consultation / Notes</string>
     <string name="btn_save_appointment">Save Appointment</string>
+
+    <string name="title_clinics">Clinics in your area</string>
+    <string name="desc_clinics">Find the nearest clinic to you</string>
+
+    <string name="toast_appointment_saved">Appointment saved successfully!</string>
+    <string name="toast_error_fields">Please complete all required fields.</string>
+    <string name="toast_cancel_warning">Are you sure you want to cancel?</string>
 </resources>
