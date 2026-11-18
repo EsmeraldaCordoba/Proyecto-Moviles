@@ -11,10 +11,22 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val btnAppointment = findViewById<Button>(R.id.btnGoToAppointment)
+        val btnRegisteredAppointments = findViewById<Button>(R.id.btnGoToRegisteredAppointments)
+        val btnDiary = findViewById<Button>(R.id.btnGoToDiary)
         val btnLocation = findViewById<Button>(R.id.btnGoToLocation)
 
         btnAppointment.setOnClickListener {
             val intent = Intent(this, AppointmentActivity::class.java)
+            startActivity(intent)
+        }
+
+        btnRegisteredAppointments.setOnClickListener {
+            val intent = Intent(this, RegisteredAppointmentsActivity::class.java)
+            startActivity(intent)
+        }
+
+        btnDiary.setOnClickListener {
+            val intent = Intent(this, NutritionalDiaryActivity::class.java)
             startActivity(intent)
         }
 

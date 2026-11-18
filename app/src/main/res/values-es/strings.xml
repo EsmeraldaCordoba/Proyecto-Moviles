@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">NutriStatus</string>
+    <string name="title_appointments">Citas Registradas</string>
     <string name="title_book_appointment">Agendar Nueva Cita</string>
     <string name="label_specialty">Especialidad Requerida</string>
     <string name="label_doctor">Seleccionar Médico</string>
@@ -7,11 +8,32 @@
     <string name="label_time">Horarios Disponibles</string>
     <string name="label_reason">Motivo de la Consulta / Notas</string>
     <string name="btn_save_appointment">Guardar Cita</string>
-
+    <string name="btn_date">Fecha</string>
+    <string name="btn_filters">Filtros</string>
+    <string name="hint_search_appointments">Buscar citas...</string>
+    <string name="status_confirmed">Confirmada</string>
+    <string name="status_completed">Completada</string>
+    <string name="status_pending">Pendiente</string>
+    <string name="status_canceled">Cancelada</string>
+    <string name="label_clinic_prefix">Clínica:</string>
+    <string name="label_date_prefix">Fecha:</string>
     <string name="title_clinics">Clínicas en tu área</string>
     <string name="desc_clinics">Encuentre la clínica más cercana a usted</string>
-
     <string name="toast_appointment_saved">¡Cita guardada exitosamente!</string>
     <string name="toast_error_fields">Por favor complete todos los campos requeridos.</string>
     <string name="toast_cancel_warning">¿Está seguro que desea cancelar?</string>
+    <string name="empty_appointments">No hay citas registradas aún.</string>
+    <string name="btn_view_appointments">Ver Citas Registradas</string>
+    <string name="title_nutritional_diary">Diario Nutricional</string>
+    <string name="hint_search_diary">Buscar diario...</string>
+    <string name="btn_upload_photo">Subir Foto</string>
+    <string name="empty_diary">No hay entradas guardadas aún.</string>
+    <string name="dialog_select_image_source">Seleccionar origen de imagen</string>
+    <string name="option_camera">Cámara</string>
+    <string name="option_gallery">Galería</string>
+    <string name="dialog_add_entry_title">Nueva entrada en diario</string>
+    <string name="hint_entry_title">Título</string>
+    <string name="hint_entry_description">Descripción</string>
+    <string name="btn_save">Guardar</string>
+    <string name="btn_cancel">Cancelar</string>
 </resources>

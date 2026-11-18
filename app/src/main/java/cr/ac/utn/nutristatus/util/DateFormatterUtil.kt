@@ -9,4 +9,18 @@ object DateFormatterUtil {
         val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
         return formatter.format(date)
     }
+
+    fun formatToDisplayDateTime(date: Date): String {
+        val formatter = SimpleDateFormat("dd/MM/yyyy hh:mm a", Locale.getDefault())
+        return formatter.format(date)
+    }
+
+    fun parseDate(dateStr: String): Date {
+        return try {
+            val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+            formatter.parse(dateStr) ?: Date()
+        } catch (e: Exception) {
+            Date()
+        }
+    }
 }

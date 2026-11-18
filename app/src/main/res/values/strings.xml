@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">NutriStatus</string>
+    <string name="title_appointments">Registered Appointments</string>
     <string name="title_book_appointment">Book New Appointment</string>
     <string name="label_specialty">Required Specialty</string>
     <string name="label_doctor">Select Doctor</string>
@@ -7,11 +8,32 @@
     <string name="label_time">Available Times</string>
     <string name="label_reason">Reason for Consultation / Notes</string>
     <string name="btn_save_appointment">Save Appointment</string>
-
+    <string name="btn_date">Date</string>
+    <string name="btn_filters">Filters</string>
+    <string name="hint_search_appointments">Search appointments...</string>
+    <string name="status_confirmed">Confirmed</string>
+    <string name="status_completed">Completed</string>
+    <string name="status_pending">Pending</string>
+    <string name="status_canceled">Canceled</string>
+    <string name="label_clinic_prefix">Clinic:</string>
+    <string name="label_date_prefix">Date:</string>
     <string name="title_clinics">Clinics in your area</string>
     <string name="desc_clinics">Find the nearest clinic to you</string>
-
     <string name="toast_appointment_saved">Appointment saved successfully!</string>
     <string name="toast_error_fields">Please complete all required fields.</string>
     <string name="toast_cancel_warning">Are you sure you want to cancel?</string>
+    <string name="empty_appointments">No appointments registered yet.</string>
+    <string name="btn_view_appointments">View Appointments</string>
+    <string name="title_nutritional_diary">Nutritional Diary</string>
+    <string name="hint_search_diary">Search diary...</string>
+    <string name="btn_upload_photo">Upload Photo</string>
+    <string name="empty_diary">No diary entries added yet.</string>
+    <string name="dialog_select_image_source">Select Image Source</string>
+    <string name="option_camera">Camera</string>
+    <string name="option_gallery">Gallery</string>
+    <string name="dialog_add_entry_title">New Diary Entry</string>
+    <string name="hint_entry_title">Title</string>
+    <string name="hint_entry_description">Description</string>
+    <string name="btn_save">Save</string>
+    <string name="btn_cancel">Cancel</string>
 </resources>

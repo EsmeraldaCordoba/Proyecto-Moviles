@@ -26,6 +26,14 @@
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
         <activity
+            android:name=".RegisteredAppointmentsActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".NutritionalDiaryActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
             android:name=".LocationActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
