@@ -13,6 +13,14 @@ class NutritionalDiaryViewModel(
         return repository.addEntry(entry)
     }
 
+    fun updateEntry(entry: NutritionalEntry): Boolean {
+        return repository.updateEntry(entry)
+    }
+
+    fun deleteEntry(id: String): Boolean {
+        return repository.deleteEntry(id)
+    }
+
     fun loadEntries(): List<NutritionalEntry> {
         return repository.getEntries()
     }
