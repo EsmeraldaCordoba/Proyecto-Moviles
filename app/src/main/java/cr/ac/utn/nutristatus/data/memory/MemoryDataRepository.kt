@@ -37,6 +37,20 @@ class MemoryDataRepository private constructor() : AppointmentRepository, Locati
         return diaryEntries.toList()
     }
 
+    override fun updateEntry(entry: NutritionalEntry): Boolean {
+        val index = diaryEntries.indexOfFirst { it.id == entry.id }
+        return if (index != -1) {
+            diaryEntries[index] = entry
+            true
+        } else {
+            false
+        }
+    }
+
+    override fun deleteEntry(id: String): Boolean {
+        return diaryEntries.removeIf { it.id == id }
+    }
+
     companion object {
         @Volatile
         private var instance: MemoryDataRepository? = null

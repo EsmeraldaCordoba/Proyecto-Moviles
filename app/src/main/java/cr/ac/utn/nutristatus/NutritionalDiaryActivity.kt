@@ -53,7 +53,6 @@ class NutritionalDiaryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_nutritional_diary)
 
-        val etSearch = findViewById<EditText>(R.id.etSearchDiary)
         val btnUpload = findViewById<Button>(R.id.btnUploadPhoto)
         container = findViewById(R.id.layoutDiaryContainer)
         tvEmpty = findViewById(R.id.tvEmptyDiary)
@@ -61,14 +60,6 @@ class NutritionalDiaryActivity : AppCompatActivity() {
         btnUpload.setOnClickListener {
             showImageSourceOptions()
         }
-
-        etSearch.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                filterList(s.toString())
-            }
-            override fun afterTextChanged(s: Editable?) {}
-        })
     }
 
     override fun onResume() {
@@ -134,6 +125,68 @@ class NutritionalDiaryActivity : AppCompatActivity() {
         builder.show()
     }
 
+    private fun showEditEntryDialog(entry: NutritionalEntry) {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle(getString(R.string.dialog_edit_entry_title))
+
+        val layout = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            val pad = (16 * resources.displayMetrics.density).toInt()
+            setPadding(pad, pad, pad, pad)
+        }
+
+        val etTitle = EditText(this).apply {
+            hint = getString(R.string.hint_entry_title)
+            setText(entry.title)
+        }
+        val etDescription = EditText(this).apply {
+            hint = getString(R.string.hint_entry_description)
+            setText(entry.description)
+        }
+
+        layout.addView(etTitle)
+        layout.addView(etDescription)
+        builder.setView(layout)
+
+        builder.setPositiveButton(getString(R.string.btn_save)) { _, _ ->
+            val titleText = etTitle.text.toString().trim()
+            val descText = etDescription.text.toString().trim()
+            if (titleText.isNotEmpty()) {
+                val updatedEntry = entry.copy(
+                    title = titleText,
+                    description = descText
+                )
+                showUpdateConfirmationDialog(updatedEntry)
+            }
+        }
+        builder.setNegativeButton(getString(R.string.btn_cancel), null)
+        builder.show()
+    }
+
+    private fun showUpdateConfirmationDialog(entry: NutritionalEntry) {
+        AlertDialog.Builder(this)
+            .setTitle(getString(R.string.dialog_update_confirm_title))
+            .setMessage(getString(R.string.dialog_update_confirm_message))
+            .setPositiveButton(getString(R.string.btn_confirm)) { _, _ ->
+                viewModel.updateEntry(entry)
+                loadData()
+            }
+            .setNegativeButton(getString(R.string.btn_cancel), null)
+            .show()
+    }
+
+    private fun showDeleteConfirmationDialog(entry: NutritionalEntry) {
+        AlertDialog.Builder(this)
+            .setTitle(getString(R.string.dialog_delete_confirm_title))
+            .setMessage(getString(R.string.dialog_delete_confirm_message))
+            .setPositiveButton(getString(R.string.btn_confirm)) { _, _ ->
+                viewModel.deleteEntry(entry.id)
+                loadData()
+            }
+            .setNegativeButton(getString(R.string.btn_cancel), null)
+            .show()
+    }
+
     private fun saveBitmapToCache(bitmap: Bitmap): String {
         val file = File(cacheDir, "diary_${System.currentTimeMillis()}.jpg")
         val out = FileOutputStream(file)
@@ -146,11 +199,6 @@ class NutritionalDiaryActivity : AppCompatActivity() {
     private fun loadData() {
         val entries = viewModel.loadEntries()
         displayEntries(entries)
-    }
-
-    private fun filterList(query: String) {
-        val filtered = viewModel.filterEntries(query)
-        displayEntries(filtered)
     }
 
     private fun displayEntries(list: List<NutritionalEntry>) {
@@ -230,9 +278,53 @@ class NutritionalDiaryActivity : AppCompatActivity() {
                 setTextColor(Color.parseColor("#999999"))
             }
 
+            val actionRow = LinearLayout(this).apply {
+                orientation = LinearLayout.HORIZONTAL
+                layoutParams = LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+                ).apply {
+                    setMargins(0, (8 * density).toInt(), 0, 0)
+                }
+            }
+
+            val btnEdit = Button(this).apply {
+                text = getString(R.string.btn_edit)
+                textSize = 12f
+                layoutParams = LinearLayout.LayoutParams(
+                    0,
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    1f
+                ).apply {
+                    setMargins(0, 0, (4 * density).toInt(), 0)
+                }
+                setOnClickListener {
+                    showEditEntryDialog(entry)
+                }
+            }
+
+            val btnDelete = Button(this).apply {
+                text = getString(R.string.btn_delete)
+                textSize = 12f
+                layoutParams = LinearLayout.LayoutParams(
+                    0,
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    1f
+                ).apply {
+                    setMargins((4 * density).toInt(), 0, 0, 0)
+                }
+                setOnClickListener {
+                    showDeleteConfirmationDialog(entry)
+                }
+            }
+
+            actionRow.addView(btnEdit)
+            actionRow.addView(btnDelete)
+
             cardContent.addView(tvTitle)
             cardContent.addView(tvDesc)
             cardContent.addView(tvTime)
+            cardContent.addView(actionRow)
 
             cardView.addView(cardContent)
             container.addView(cardView)

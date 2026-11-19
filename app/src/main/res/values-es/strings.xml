@@ -36,4 +36,12 @@
     <string name="hint_entry_description">Descripción</string>
     <string name="btn_save">Guardar</string>
     <string name="btn_cancel">Cancelar</string>
+    <string name="btn_edit">Editar</string>
+    <string name="btn_delete">Eliminar</string>
+    <string name="dialog_edit_entry_title">Editar entrada en diario</string>
+    <string name="dialog_update_confirm_title">Confirmar Actualización</string>
+    <string name="dialog_update_confirm_message">¿Está seguro que desea actualizar esta entrada?</string>
+    <string name="dialog_delete_confirm_title">Confirmar Eliminación</string>
+    <string name="dialog_delete_confirm_message">¿Está seguro que desea eliminar esta entrada?</string>
+    <string name="btn_confirm">Confirmar</string>
 </resources>
