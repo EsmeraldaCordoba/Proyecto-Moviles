@@ -32,6 +32,7 @@ class NutritionalDiaryActivity : AppCompatActivity() {
     private val viewModel = NutritionalDiaryViewModel()
     private lateinit var container: LinearLayout
     private lateinit var tvEmpty: TextView
+    private lateinit var etSearch: EditText
 
     private val takePhotoLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == RESULT_OK) {
@@ -53,6 +54,7 @@ class NutritionalDiaryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_nutritional_diary)
 
+        etSearch = findViewById(R.id.etSearchDiary)
         val btnUpload = findViewById<Button>(R.id.btnUploadPhoto)
         container = findViewById(R.id.layoutDiaryContainer)
         tvEmpty = findViewById(R.id.tvEmptyDiary)
@@ -60,6 +62,14 @@ class NutritionalDiaryActivity : AppCompatActivity() {
         btnUpload.setOnClickListener {
             showImageSourceOptions()
         }
+
+        etSearch.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                filterList(s.toString())
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
     }
 
     override fun onResume() {
@@ -197,8 +207,14 @@ class NutritionalDiaryActivity : AppCompatActivity() {
     }
 
     private fun loadData() {
-        val entries = viewModel.loadEntries()
+        val query = if (::etSearch.isInitialized) etSearch.text.toString() else ""
+        val entries = viewModel.filterEntries(query)
         displayEntries(entries)
+    }
+
+    private fun filterList(query: String) {
+        val filtered = viewModel.filterEntries(query)
+        displayEntries(filtered)
     }
 
     private fun displayEntries(list: List<NutritionalEntry>) {
