@@ -1,15 +1,20 @@
 package cr.ac.utn.nutristatus.viewmodel
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import cr.ac.utn.nutristatus.data.memory.MemoryDataRepository
 import cr.ac.utn.nutristatus.domain.model.Appointment
 import cr.ac.utn.nutristatus.domain.repository.AppointmentRepository
+import kotlinx.coroutines.launch
 
 class BookAppointmentViewModel(
     private val repository: AppointmentRepository = MemoryDataRepository.getInstance()
 ) : ViewModel() {
 
-    fun saveAppointment(appointment: Appointment): Boolean {
-        return repository.createAppointment(appointment)
+    fun saveAppointment(appointment: Appointment, onComplete: (() -> Unit)? = null) {
+        viewModelScope.launch {
+            repository.insertAppointment(appointment)
+            onComplete?.invoke()
+        }
     }
 }
