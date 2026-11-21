@@ -13,13 +13,27 @@
         android:textSize="32sp"
         android:textStyle="bold"
         android:textAlignment="center"
-        android:layout_marginBottom="48dp" />
+        android:layout_marginBottom="32dp" />
 
     <Button
         android:id="@+id/btnGoToAppointment"
         android:layout_width="match_parent"
         android:layout_height="64dp"
         android:text="@string/title_book_appointment"
+        android:layout_marginBottom="16dp" />
+
+    <Button
+        android:id="@+id/btnGoToRegisteredAppointments"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:text="@string/title_appointments"
+        android:layout_marginBottom="16dp" />
+
+    <Button
+        android:id="@+id/btnGoToDiary"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:text="@string/title_nutritional_diary"
         android:layout_marginBottom="16dp" />
 
     <Button
