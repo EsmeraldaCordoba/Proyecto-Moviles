@@ -6,7 +6,10 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import cr.ac.utn.nutristatus.data.local.database.NutriStatusDatabase
+import cr.ac.utn.nutristatus.data.repository.RoomAppointmentRepository
 import cr.ac.utn.nutristatus.domain.model.Appointment
 import cr.ac.utn.nutristatus.domain.model.AppointmentStatus
 import cr.ac.utn.nutristatus.util.DateFormatterUtil
@@ -15,7 +18,11 @@ import java.util.Date
 
 class AppointmentActivity : AppCompatActivity() {
 
-    private val viewModel = AppointmentViewModel()
+    private val viewModel: AppointmentViewModel by viewModels {
+        val database = NutriStatusDatabase.getDatabase(application)
+        val repository = RoomAppointmentRepository(database.appointmentDao())
+        AppointmentViewModel.Factory(repository)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,9 +63,10 @@ class AppointmentActivity : AppCompatActivity() {
                 reason = reason
             )
 
-            viewModel.scheduleAppointment(appointment)
-            Toast.makeText(this, getString(R.string.toast_appointment_saved), Toast.LENGTH_SHORT).show()
-            finish()
+            viewModel.scheduleAppointment(appointment) {
+                Toast.makeText(this, getString(R.string.toast_appointment_saved), Toast.LENGTH_SHORT).show()
+                finish()
+            }
         }
     }
 }

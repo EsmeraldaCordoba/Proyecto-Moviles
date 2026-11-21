@@ -6,23 +6,48 @@ import cr.ac.utn.nutristatus.domain.model.NutritionalEntry
 import cr.ac.utn.nutristatus.domain.repository.AppointmentRepository
 import cr.ac.utn.nutristatus.domain.repository.LocationRepository
 import cr.ac.utn.nutristatus.domain.repository.NutritionalDiaryRepository
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 
 class MemoryDataRepository private constructor() : AppointmentRepository, LocationRepository, NutritionalDiaryRepository {
 
-    private val appointments = mutableListOf<Appointment>()
+    private val appointmentsFlow = MutableStateFlow<List<Appointment>>(emptyList())
     private val diaryEntries = mutableListOf<NutritionalEntry>()
     private var clinicLocation: Location? = Location("1", "Clínica Principal", "San José, Costa Rica")
 
-    override fun createAppointment(appointment: Appointment): Boolean {
-        return appointments.add(appointment)
+    override fun observeAppointments(): Flow<List<Appointment>> {
+        return appointmentsFlow.asStateFlow()
     }
 
-    override fun getAppointment(): Appointment? {
-        return appointments.lastOrNull()
+    override suspend fun getAppointments(): List<Appointment> {
+        return appointmentsFlow.value
     }
 
-    override fun getAppointments(): List<Appointment> {
-        return appointments.toList()
+    override suspend fun getAppointmentById(id: String): Appointment? {
+        return appointmentsFlow.value.find { it.id == id }
+    }
+
+    override suspend fun insertAppointment(appointment: Appointment) {
+        val current = appointmentsFlow.value.toMutableList()
+        current.removeAll { it.id == appointment.id }
+        current.add(appointment)
+        appointmentsFlow.value = current
+    }
+
+    override suspend fun updateAppointment(appointment: Appointment) {
+        val current = appointmentsFlow.value.toMutableList()
+        val index = current.indexOfFirst { it.id == appointment.id }
+        if (index != -1) {
+            current[index] = appointment
+            appointmentsFlow.value = current
+        }
+    }
+
+    override suspend fun deleteAppointment(id: String) {
+        val current = appointmentsFlow.value.toMutableList()
+        current.removeAll { it.id == id }
+        appointmentsFlow.value = current
     }
 
     override fun getClinicLocation(): Location? {

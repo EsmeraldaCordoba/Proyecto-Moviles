@@ -12,18 +12,33 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import cr.ac.utn.nutristatus.data.local.database.NutriStatusDatabase
+import cr.ac.utn.nutristatus.data.repository.RoomAppointmentRepository
 import cr.ac.utn.nutristatus.domain.model.Appointment
 import cr.ac.utn.nutristatus.domain.model.AppointmentStatus
 import cr.ac.utn.nutristatus.util.DateFormatterUtil
 import cr.ac.utn.nutristatus.viewmodel.AppointmentViewModel
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class RegisteredAppointmentsActivity : AppCompatActivity() {
 
-    private val viewModel = AppointmentViewModel()
+    private val viewModel: AppointmentViewModel by viewModels {
+        val database = NutriStatusDatabase.getDatabase(application)
+        val repository = RoomAppointmentRepository(database.appointmentDao())
+        AppointmentViewModel.Factory(repository)
+    }
+
     private lateinit var container: LinearLayout
     private lateinit var tvEmptyAppointments: TextView
+    private var allAppointments: List<Appointment> = emptyList()
+    private var currentSearchQuery: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,24 +57,24 @@ class RegisteredAppointmentsActivity : AppCompatActivity() {
         etSearch.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                filterList(s.toString())
+                currentSearchQuery = s.toString()
+                filterAndDisplay()
             }
             override fun afterTextChanged(s: Editable?) {}
         })
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.appointments.collectLatest { list ->
+                    allAppointments = list
+                    filterAndDisplay()
+                }
+            }
+        }
     }
 
-    override fun onResume() {
-        super.onResume()
-        loadData()
-    }
-
-    private fun loadData() {
-        val appointments = viewModel.loadAppointments()
-        displayAppointments(appointments)
-    }
-
-    private fun filterList(query: String) {
-        val filtered = viewModel.filterAppointments(query)
+    private fun filterAndDisplay() {
+        val filtered = viewModel.filterAppointments(currentSearchQuery, allAppointments)
         displayAppointments(filtered)
     }
 
